@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<robot name="plan_bot">
+
+  <link name="base_footprint">
+  </link>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0.0 0.0 0.10" rpy="0 0 0"/>
+  </joint>
+  <!-- Base Link -->
+  <link name="base_link">
+    <collision name="base_link_collision">
+      <geometry>
+        <cylinder radius="0.25" length="0.15"/>
+      </geometry>
+    </collision>
+    <visual name="base_link_visual">
+      <geometry>
+        <cylinder radius="0.25" length="0.15"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="5.0"/>
+      <inertia ixx="0.013" ixy="0.0" ixz="0.0" iyy="0.013" iyz="0.0" izz="0.0025"/>
+    </inertial>
+  </link>
+
+  <!-- Body Link -->
+  <link name="body_link">
+    <origin xyz="0 0 0.575" rpy="0 0 0"/>
+    <visual name="body_link_visual">
+      <geometry>
+        <box size="0.4 0.15 1"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.5"/>
+      <inertia ixx="0.15" ixy="0.0" ixz="0.0" iyy="0.15" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- Wheel Link 1 -->
+  <link name="wheel_link_1">
+    <origin xyz="-0.275 0 -0.075" rpy="0 0 0"/>
+    <collision name="wheel_link_1_collision">
+    <origin xyz="0 0 0" rpy="0 -1.57 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.05"/>
+      </geometry>
+    </collision>
+    <visual name="wheel_link_1_visual">
+    <origin xyz="0 0 0" rpy="0 -1.57 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.05"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.0005" ixy="0.0" ixz="0.0" iyy="0.0005" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <!-- Wheel Link 2 -->
+  <link name="wheel_link_2">
+    <origin xyz="0.275 0 -0.075" rpy="0 0 0"/>
+    <collision name="wheel_link_2_collision">
+        <origin xyz="0 0 0" rpy="0 -1.57 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.05"/>
+      </geometry>
+    </collision>
+    <visual name="wheel_link_2_visual">
+        <origin xyz="0 0 0" rpy="0 -1.57 0"/>
+      <geometry>
+        <cylinder radius="0.05" length="0.05"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.2"/>
+      <inertia ixx="0.0005" ixy="0.0" ixz="0.0" iyy="0.0005" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <!-- Castor 1 -->
+  <link name="castor_1">
+    <origin xyz="0 0.20 -0.10" rpy="0 0 0"/>
+    <visual name="visual">
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+    </visual>
+    <collision name="collision">
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.0005" ixy="0.0" ixz="0.0" iyy="0.0005" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <!-- Castor 2 -->
+  <link name="castor_2">
+    <origin xyz="0 -0.20 -0.10" rpy="0 0 0"/>
+    <visual name="visual">
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+    </visual>
+    <collision name="collision">
+      <geometry>
+        <sphere radius="0.025"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.0005" ixy="0.0" ixz="0.0" iyy="0.0005" iyz="0.0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <!-- IMU Link -->
+  <link name="imu_link"/>
+
+  <!-- Base Scan -->
+  <link name="base_scan">
+    <origin xyz="-0.020 0 0.161" rpy="0 0 0"/>
+    <inertial>
+      <mass value="0.114"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+    <collision name="lidar_sensor_collision">
+      <geometry>
+        <cylinder radius="0.0508" length="0.055"/>
+      </geometry>
+    </collision>
+    <visual name="lidar_sensor_visual">
+      <geometry>
+        <cylinder radius="0.0508" length="0.055"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- Joints -->
+  <joint name="base_to_body_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="body_link"/>
+    <origin xyz="0 0 0.575" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="wheel_1_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_link_1"/>
+    <origin xyz="-0.275 0 -0.075" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <joint name="wheel_2_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_link_2"/>
+    <origin xyz="0.275 0 -0.075" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <joint name="castor_1_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="castor_1"/>
+    <origin xyz="0 0.20 -0.10" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="castor_2_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="castor_2"/>
+    <origin xyz="0 -0.20 -0.10" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="-0.032 0 0.068" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_scan"/>
+    <origin xyz="-0.032 0 0.171" rpy="0 0 0"/>
+  </joint>
+
+</robot>

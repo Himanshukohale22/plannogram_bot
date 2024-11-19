@@ -1,0 +1,527 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+<model name="plan_bot">
+<pose>0 0 0.125 0 0 0</pose>
+  <!-- <static>1</static> -->
+   
+    <link name="base_link">
+      <collision name="base_link_collision">
+        <geometry>
+          <cylinder>
+            <radius>0.25</radius>  <!-- 50 cm diameter -->
+            <length>0.15</length>  <!-- 15 cm height -->
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient> <!-- White color -->
+        </material>
+      </collision>
+      <visual name="base_link_visual">
+        <geometry>
+          <cylinder>
+            <radius>0.25</radius>  <!-- 50 cm diameter -->
+            <length>0.15</length>  <!-- 15 cm height -->
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>1 1 1 1</ambient> <!-- White color -->
+        </material>
+      </visual>
+      <inertial>
+        <mass>5.0</mass> <!-- 5 kg -->
+        <inertia>
+          <ixx>0.013</ixx>  <!-- Example values, will need to calculate based on the shape -->
+          <iyy>0.013</iyy>
+          <izz>0.0025</izz>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name="body_link">
+    <pose>0 0 0.575 0 0 0</pose>
+      <!-- <collision name="body_link_collision">
+        <geometry>
+          <box>
+            <size>0.4 0.15 1</size> 
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5 0.5 0.5 1</ambient> 
+        </material>
+      </collision> -->
+      <visual name="body_link_visual">
+        <geometry>
+          <box>
+            <size>0.4 0.15 1</size> 
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5 0.5 0.5 1</ambient> 
+        </material>
+      </visual>
+      <visual name="logo">
+      <pose> 0 0.075 0 1.57 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://plan_bot/meshes/fynd_robotics_logo.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.2 0.2 0.2 1</ambient> 
+        </material>
+      </visual>
+      <inertial>
+        <mass>0.5</mass> 
+        <inertia>
+          <ixx>0.15</ixx>  
+          <iyy>0.15</iyy>
+          <izz>0.01</izz>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+    </link>
+
+
+    <link name="wheel_link_1">
+    <pose>-0.275 0 -0.075  0 0 0</pose>
+      <collision name="wheel_link_1_collision">
+      <pose>0 0 0  0 -1.57 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>  
+            <length>0.05</length>  
+          </cylinder>
+        </geometry>
+        <surface>
+          <!-- This friction pamareter don't contain reliable data!! -->
+          <friction>
+            <ode>
+              <mu>100000.0</mu>
+              <mu2>100000.0</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0.0</slip1>
+              <slip2>0.0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+5</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <material>
+          <ambient>0 0 0 1</ambient>
+        </material>
+      </collision>
+      <visual name="wheel_link_1_visual">
+      <pose>0 0 0  0 -1.57 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>  
+            <length>0.05</length>  
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient> 
+        </material>
+      </visual>
+      <inertial>
+        <mass>0.2</mass> 
+        <inertia>
+          <ixx>0.0005</ixx>  
+          <iyy>0.0005</iyy>
+          <izz>0.0001</izz>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <!-- Wheel Link 2 -->
+    <link name="wheel_link_2">
+    <pose>0.275 0 -0.075  0 0 0</pose>
+      <collision name="wheel_link_2_collision">
+      <pose>0 0 0  0 -1.57 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>  <!-- 10 cm diameter -->
+            <length>0.05</length>  <!-- 5 cm height -->
+          </cylinder>
+        </geometry>
+        <surface>
+          <!-- This friction pamareter don't contain reliable data!! -->
+          <friction>
+            <ode>
+              <mu>100000.0</mu>
+              <mu2>100000.0</mu2>
+              <fdir1>0 0 0</fdir1>
+              <slip1>0.0</slip1>
+              <slip2>0.0</slip2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+5</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        <material>
+          <ambient>0 0 0 1</ambient> <!-- Black color -->
+        </material>
+      </collision>
+      <visual name="wheel_link_2_visual">
+      <pose>0 0 0  0 -1.57 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.05</radius>  <!-- 10 cm diameter -->
+            <length>0.05</length>  <!-- 5 cm height -->
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient> <!-- Black color -->
+        </material>
+      </visual>
+      <inertial>
+        <mass>0.2</mass> <!-- 0.2 kg -->
+        <inertia>
+          <ixx>0.0005</ixx>  <!-- Example inertia values -->
+          <iyy>0.0005</iyy>
+          <izz>0.0001</izz>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name="castor_1">
+      <pose>0 0.20 -0.10 0 0 0</pose>
+      <visual name="visual">
+        <geometry>
+          <sphere>
+            <radius>0.025</radius>
+          </sphere>
+        </geometry>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <sphere>
+            <radius>0.025</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+5</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <inertial>
+      <mass>0.1</mass>
+        <inertia>
+          <ixx>0.0005</ixx>  <!-- Example inertia values -->
+          <iyy>0.0005</iyy>
+          <izz>0.0001</izz>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name="castor_2">
+      <pose>0 -0.20 -0.10 0 0 0</pose>
+      <visual name="visual">
+        <geometry>
+          <sphere>
+            <radius>0.025</radius>
+          </sphere>
+        </geometry>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <sphere>
+            <radius>0.025</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1e+5</kp>
+              <kd>1</kd>
+              <max_vel>0.01</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+      <inertial>
+      <mass>0.1</mass>
+        <inertia>
+          <ixx>0.0005</ixx>  <!-- Example inertia values -->
+          <iyy>0.0005</iyy>
+          <izz>0.0001</izz>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <link name="imu_link">
+      <sensor name="plan_bot_imu" type="imu">
+        <always_on>true</always_on>
+        <update_rate>200</update_rate>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+        <plugin name="plan_bot_imu" filename="libgazebo_ros_imu_sensor.so">
+          <ros>
+            <!-- <namespace>/tb3</namespace> -->
+            <remapping>~/out:=imu</remapping>
+          </ros>
+        </plugin>
+      </sensor>
+    </link>
+
+    <link name="base_scan">
+      <inertial>
+        <pose>-0.020 0 0.161 0 0 0</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+        <mass>0.114</mass>
+      </inertial>
+
+      <collision name="lidar_sensor_collision">
+        <pose>-0.020 0 0.161 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0508</radius>
+            <length>0.055</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name="lidar_sensor_visual">
+        <pose>-0.032 0 0.171 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://plan_bot/meshes/lds.dae</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <sensor name="plan_bot_lidar" type="ray">
+        <always_on>true</always_on>
+        <visualize>true</visualize>
+        <pose>-0.032 0 0.171 0 0 0</pose>
+        <update_rate>5</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <resolution>1.000000</resolution>
+              <min_angle>-3.14</min_angle>
+              <max_angle>3.14</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.120000</min>
+            <max>3.5</max>
+            <resolution>0.015000</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        <plugin name="plan_bot_laserscan" filename="libgazebo_ros_ray_sensor.so">
+          <ros>
+            <!-- <namespace>/tb3</namespace> -->
+            <remapping>~/out:=scan</remapping>
+          </ros>
+          <output_type>sensor_msgs/LaserScan</output_type>
+          <frame_name>base_scan</frame_name>
+        </plugin>
+      </sensor>
+    </link>
+
+    <joint name="castor_1_joint" type="ball">
+      <parent>base_link</parent>
+      <child>castor_1</child>
+      <pose>0 0 0 0 0 0</pose>
+    </joint>
+
+    <joint name="castor_2_joint" type="ball">
+      <parent>base_link</parent>
+      <child>castor_2</child>
+      <pose>0 0 0 0 0 0</pose>
+    </joint>
+    <!-- Joint between Base Link and Body Link (Fixed) -->
+    <joint name="base_to_body_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>body_link</child>
+      <pose>0 0 -0.5 0 0 0</pose> 
+    </joint>
+
+    <!-- Joint between Wheel 1 and Base Link (Revolute) -->
+    <joint name="wheel_1_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>wheel_link_1</child>
+    <pose>0.025 0 0 0 0 0</pose>
+      <axis>
+        <xyz>1 0 0</xyz> <!-- Revolute along the height of the cylinder (Y-axis) -->
+        <dynamics>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <!-- Joint between Wheel 2 and Base Link (Revolute) -->
+    <joint name="wheel_2_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>wheel_link_2</child>
+      <pose>-0.025 0 0 0 0 0</pose> <!-- Wheel 2 positioned on the opposite edge of the base link -->
+      <axis>
+        <xyz>1 0 0</xyz> <!-- Revolute along the height of the cylinder (Y-axis) -->
+        <dynamics>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+
+    <joint name="imu_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>imu_link</child>
+      <pose>-0.032 0 0.068 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="lidar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>base_scan</child>
+      <pose>-0.032 0 0.171 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+
+    <plugin name="plan_bot_diff_drive" filename="libgazebo_ros_diff_drive.so">
+
+      <!-- <ros>
+        <namespace>/plan_bot</namespace>
+      </ros> -->
+
+      <update_rate>30</update_rate>
+
+      <!-- wheels -->
+      <left_joint>wheel_1_joint</left_joint>
+      <right_joint>wheel_2_joint</right_joint>
+
+      <!-- kinematics -->
+      <wheel_separation>0.550</wheel_separation>
+      <wheel_diameter>0.100</wheel_diameter>
+
+      <!-- limits -->
+      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+
+      <command_topic>cmd_vel</command_topic>
+
+      <!-- output -->
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>false</publish_wheel_tf>
+
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+
+    </plugin>
+
+    <plugin name="plan_bot_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
+      <ros>
+        <remapping>~/out:=joint_states</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <joint_name>wheel_1_joint</joint_name>
+      <joint_name>wheel_2_joint</joint_name>
+    </plugin>
+
+  </model>
+</sdf>
